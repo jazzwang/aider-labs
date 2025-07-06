@@ -12,6 +12,7 @@ ollama pull gemma3:1b
 if ! which aider > /dev/null; then                ## save some time if aider was already installed
   echo "Installing Aider (using pip) ..."
   python -m pip install aider-install
+  export PATH=$PATH:~/.local/bin
   aider-install
 fi
 aider --version
