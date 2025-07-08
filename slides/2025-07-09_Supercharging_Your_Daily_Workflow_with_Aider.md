@@ -314,7 +314,7 @@ Here are `PROs` and `CONs` running `Aider + Ollama` on different environments:
   - PS: `/model gemini-2.5{TAB Key}` use [Google Vertex AI](https://cloud.google.com/vertex-ai) LLMs
 - use `/models {keyword}` to list all supported LLM models matched *{keyword}*.
 
-![](aider-list-models.png)
+<img src='aider-list-models.png' height='600'>
 
 <!-- slide vertical=true -->
 
@@ -329,7 +329,7 @@ Here are `PROs` and `CONs` running `Aider + Ollama` on different environments:
 GEMINI_API_KEY={paste your new key here}
 ```
 
-![](new-gemini-api-key.png)
+<img src='new-gemini-api-key.png' height='600'>
 
 <!-- slide -->
 
@@ -506,7 +506,7 @@ based on the transcript, could you create a report for "{MASKED}" project, the f
 
 <!-- slide -->
 
-### Summary + Q & A
+### Summary
 
 <hr/>
 
@@ -521,6 +521,12 @@ based on the transcript, could you create a report for "{MASKED}" project, the f
   - Practice `"Prompt Engineering"`
   - Try to get familiar with a *AI Code Assistant* based on your preference!
 
------
+<!-- slide -->
 
-> ## The only **limitation** <br/> is our *imagination*!
+## Q & A
+
+> <p><h3><b>Learn</b> by <em>Doing</em></h3></p>
+
+|||
+|---|---|
+| <h4>Supercharging Your Daily Workflow <br/> with `Aider` and `Local LLMs`</h4> <br/>Contact [Jazz Yao-Tsung Wang](https://jazzwang.github.io/cv/) <br/>https://www.linkedin.com/in/jazzwang/ | ![Jazz Wang](https://jazzwang.github.io/cv/assets/images/profile.jpg) |
