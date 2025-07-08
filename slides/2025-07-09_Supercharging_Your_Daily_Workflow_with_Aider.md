@@ -283,6 +283,7 @@ When your prompt (input data) contains:
 
 </td></tr>
 </table>
+
 <!-- slide -->
 
 ### How to install Aider on different platforms?
@@ -291,6 +292,8 @@ When your prompt (input data) contains:
 
 Here are `PROs` and `CONs` running `Aider + Ollama` on different environments:
 
+-----
+
 | Environment         | vCPU | RAM | VRAM | Disk | PROs | CONs | Labs |
 |---------------------|------|-----|----------|------|------|------|------|
 | Google Colab        | 2 | 12 GB | (T4) *15GB* | *72 GB* | free T4 GPU | time out | <a href='https://colab.research.google.com/github/jazzwang/aider-labs/blob/master/lab1/aider_ollama_colab.ipynb' target="_blank"><img alt='Open in Colab' src='https://colab.research.google.com/assets/colab-badge.svg'></a> |
@@ -298,23 +301,35 @@ Here are `PROs` and `CONs` running `Aider + Ollama` on different environments:
 | Github Codespaces   | *4* | *15 GB* | N/A | *16 GB* | up to 4 cores/16GM RAM/32 GB Disk | No GPU | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
 | Laptop: Windows 11   | ? | ? | ? | ? | Offline Development | Slow without GPU | |
 
+-----
+
 <!-- slide -->
 
 ### Aider: How to switch between local and public LLM models?
 
 <hr/>
 
-- use `/model {MODEL}` to switch between local and public LLM models.
 - use `/model ollama/{OLLAMA_LIST_MODELS}` to use local Ollama model
 - use `/model gemini/{TAB key}` to use Google Gemini LLMs.
   - PS: `/model gemini-2.5{TAB Key}` use [Google Vertex AI](https://cloud.google.com/vertex-ai) LLMs
-- use `/models` to list all supported LLM models.
+- use `/models {keyword}` to list all supported LLM models matched *{keyword}*.
 
-<!-- slide -->
+![](aider-list-models.png)
+
+<!-- slide vertical=true -->
 
 ### LLM: How to request Google Gemini API key?
 
 <hr/>
+
+- https://aistudio.google.com/app/apikey - click `Create API Key`
+- copy the new API key and paste in `.env`
+
+```
+GEMINI_API_KEY={paste your new key here}
+```
+
+![](new-gemini-api-key.png)
 
 <!-- slide -->
 
@@ -322,59 +337,190 @@ Here are `PROs` and `CONs` running `Aider + Ollama` on different environments:
 
 <hr/>
 
-- As a Developer, you always need to read others' source code.
+Here are a list of use cases that I use Aider before:
+
+-----
+
+| # | Use Case | Description | Labs |
+|---|----------|-------------|------|
+| A | Reverse Engineering | create high-level overview and sequence diagram | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
+| B | Meeting Summary (1) | create meeting summary based on MS Teams Live Caption JSON file | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
+| C | Meeting Summary (2) | create meeting summary based on MS Stream Transcript WebVTT file | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
+| D | Monthly Team Achievement Summary | create Team Achievement Summary based on Jira Export file | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
+| E | Rewrite Program (1) | From Shell Script to Python script | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
+| F | Rewrite Program (2) | Migrate from *Selenium* to **Playwright** | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
+| G | Unit Test | Create unit test of existing code | <a href="https://codespaces.new/jazzwang/aider-labs/tree/main" target="_blank"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg"></a> |
+
+-----
 
 <!-- slide -->
 
-#### A. Reverse Engineering
+#### Case A. `Reverse Engineering`
 
 <hr/>
 
-Make it easy to understand others' git repositories
+- Needs:
+  - As a Developer, you always need to read others' source code.
+  - As as Developer, you might need to write document for your code.
+    - *Sequence Diagram* / *Class Diagram* / *Package Diagram*
+- Requirement:
+  - local clone of git repository
+- Example Prompts:
+
+```
+/ask could you give me a high-level overview of this repository?
+/ask could you draw a sequence diagram using mermaid.js syntax?
+/ask could you draw a class diagram using mermaid.js syntax?
+/ask could you draw a package diagram using PlantUML syntax?
+```
+----
 
 <!-- slide -->
 
-#### B. Meeting Summary: From MS Teams Live Caption (JSON file format)
-
-<!-- slide -->
-
-#### C. Meeting Summary: From MS Stream Transcript file (WebVTT file format)
+#### Case B. `Meeting Summary`: From MS Teams Live Caption (JSON file format)
 
 <hr/>
 
 - Requirement:
-  - Create a new Git Repo
+  - Create a new Git Repo - `git init`
+  - Reference *Chrome* extension (compatible with *Edge*): 
+    [MS Teams Live Captions Saver](https://chromewebstore.google.com/detail/ms-teams-live-captions-sa/ffjfmokaelmhincapcajcnaoelgmpoih)
+    - Source: https://github.com/Zerg00s/Live-Captions-Saver.git
+- Input:
+  - WebVTT-to-JSON transcript file (`.json`)
+- Known Limitation:
+  - *context window size* (context length) of LLM
+- Example Prompts:
+
+```
+/ask could you summarize this transcript based on different attendees? highlight action items if possible.
+```
+
+-----
+
+<!-- slide -->
+
+#### Case C. `Meeting Summary`: From MS Stream Transcript file (WebVTT file format)
+
+<hr/>
+
+- Requirement:
+  - Create a new Git Repo - `git init`
+  - (Optional) If you don't have permission to download transcript, 
+    you will need to install *Chrome* extension (compatible with *Edge*): 
+    [Transcript Extractor for Microsoft Stream](https://chromewebstore.google.com/detail/transcript-extractor-for/pabgaigmlgofdiialamkcpijifmodahl)
 - Input:
   - WebVTT transcript file (`.vtt`)
   - WebVTT-to-JSON transcript file (`.json`)
 - Known Limitation:
-  - context window size (context length)
+  - *context window size* (context length) of LLM
+- PS: can use the same on `YouTube` transcripts
+
+<!-- slide vertical=true -->
+
+- Example Prompts:
+
+```
+/ask could you summarize this transcript based on different attendees? highlight action items if possible.
+/ask could you separate this transcript based on topics and summarize each topics based on different attendees? please add action items if possible.
+```
+```
+based on the transcript, could you create a report for "{MASKED}" project, the following sections are required:
+  - Project Overview
+  - Business Objective/Problem Statement
+  - How will the product/project benefit the dealerships/end customers
+```
+-----
 
 <!-- slide -->
 
-#### D. Monthly Team Achievement Summary
+#### Case D. `Jira Summary` - Monthly Team Achievement Summary
 
 <hr/>
 
 - Requirement:
-  - Create a new Git Repo
+  - Create a new Git Repo - `git init`
 - Input:
   - Jira JQL export CSV file
+- Known Limitation:
+  - *context window size* (context length) of LLM
+- Example Prompts:
+
+```
+/ask could you summarized the following jira exported "summary" into 3 bullet points within 100 words?
+```
+-----
 
 <!-- slide -->
 
-#### E. Rewrite Program: From Shell Script to Python script
+#### Case E. `Rewrite Program` (1) : From **Shell Script** to *Python* script
 
 <hr/>
+
+- Requirement:
+  - local clone of git repository
+- Example Prompts:
+
+```
+/read-only src/download-sftp-files.sh
+/run touch src/download-sftp-files.py
+/git add src/download-sftp-files.py
+/add src/download-sftp-files.py
+```
+
+-----
 
 <!-- slide -->
 
-#### F. Rewrite Program: Migrate from Selenium to Playwright
+#### Case F. `Rewrite Program` (2) : Migrate from **Selenium** to *Playwright*
 
 <hr/>
+
+- Requirement:
+  - local clone of git repository
+- Example Prompts:
+
+```
+/add src/get-pages.py
+/ask could you rewrite `get-pages.py` using playwright to replace selenium?
+```
+
+-----
 
 <!-- slide -->
 
 #### G. Create Unit Tests
 
 <hr/>
+
+- Requirement:
+  - local clone of git repository
+- Example Prompts:
+
+```
+/read-only src/get-pages.py
+/ask could you create a unit test program for `get-pages.py`?
+```
+
+-----
+
+<!-- slide -->
+
+### Summary + Q & A
+
+<hr/>
+
+- Let's recap what we covered today
+  - What is `Aider`
+  - What is `Ollama`
+  - `Data Privacy` & `Data Control`
+  - `Local LLMs` v.s. `Public LLMs`
+  - Different ways to install Aider on different OS and Platform
+  - 8 Use Cases to boost your productivity.
+- Jazz's Suggestion
+  - Practice `"Prompt Engineering"`
+  - Try to get familiar with a *AI Code Assistant* based on your preference!
+
+-----
+
+> ## The only **limitation** <br/> is our *imagination*!
