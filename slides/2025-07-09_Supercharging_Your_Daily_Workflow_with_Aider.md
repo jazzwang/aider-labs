@@ -128,7 +128,7 @@ https://aider.chat/
 
 <!-- slide vertical=true -->
 
-### Aider Features ( 2 ) - `I dit not yet tried`
+### Aider Features ( 2 ) - `I dit not yet try`
 <hr/>
 
 <table><tr>
@@ -157,6 +157,8 @@ Source: https://aider.chat/docs/usage/lint-test.html
 <!-- slide -->
 
 ## What is Ollama?
+
+{{OLLAMA_INTRO}}
 
 <!-- slide -->
 
