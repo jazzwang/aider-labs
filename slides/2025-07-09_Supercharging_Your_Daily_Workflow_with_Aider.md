@@ -265,7 +265,7 @@ https://ollama.com/models
 When your prompt (input data) contains:
 - **Proprietary Business Information**
   information created by the organization
-  e.g. Company's `Source Code`, `Financial`, `Pattern`, etc.
+  e.g. Company's `Source Code`, `Financial`, `Patents`, etc.
 - **Material Nonpublic Information (MNPI)**
   organizational information not released to the public
   e.g. `internal server name`, `password`, `announcement`, `wiki`, etc.
